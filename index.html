@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Signature Auto | Mobile Tire Change &amp; Mechanic Service</title>
+<meta name="description" content="Signature Auto brings the tire shop to your driveway. Mobile tire changes, oil changes, brakes, diagnostics, detailing and more." />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+<style>
+  :root {
+    --bg: #0e0f11;
+    --bg-raised: #16181b;
+    --bg-panel: #1b1e22;
+    --line: rgba(255, 255, 255, 0.08);
+    --text: #f2f1ee;
+    --text-muted: #a3a49f;
+    --accent: #e8622c;
+    --accent-ink: #140b06;
+    /* radius system: pills for interactive, 18px for panels */
+    --r-panel: 18px;
+    --shadow-tint: 0 24px 60px rgba(6, 7, 9, 0.55);
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Satoshi", system-ui, -apple-system, sans-serif;
+    font-weight: 500;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { display: block; max-width: 100%; }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+  h1, h2, h3 { font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; }
+
+  a { color: inherit; text-decoration: none; }
+
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+
+  /* ---------- buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 15px 28px;
+    transition: transform 0.25s var(--ease), background 0.25s var(--ease), border-color 0.25s var(--ease);
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); }
+  .btn-primary:hover { background: #f4713a; transform: translateY(-2px); }
+  .btn-ghost { border: 1px solid rgba(255, 255, 255, 0.22); color: var(--text); }
+  .btn-ghost:hover { border-color: rgba(255, 255, 255, 0.5); transform: translateY(-2px); }
+
+  /* ---------- nav ---------- */
+  header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 40;
+    transition: background 0.3s var(--ease), border-color 0.3s var(--ease);
+    border-bottom: 1px solid transparent;
+  }
+  header.scrolled {
+    background: rgba(14, 15, 17, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom-color: var(--line);
+  }
+  .nav {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-weight: 900;
+    font-size: 19px;
+    letter-spacing: -0.02em;
+  }
+  .brand svg { flex: none; }
+  .nav-links { display: flex; align-items: center; gap: 32px; font-size: 15px; color: var(--text-muted); }
+  .nav-links a { transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav .btn { padding: 11px 22px; font-size: 15px; }
+
+  /* ---------- hero ---------- */
+  .hero {
+    min-height: 100dvh;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.85fr);
+    gap: 56px;
+    align-items: center;
+    padding-top: 96px;
+    padding-bottom: 48px;
+  }
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(42px, 5.4vw, 72px);
+    margin-bottom: 22px;
+  }
+  .hero p {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 46ch;
+    margin-bottom: 34px;
+  }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; }
+  .hero-media {
+    position: relative;
+    border-radius: var(--r-panel);
+    overflow: hidden;
+    box-shadow: var(--shadow-tint);
+    aspect-ratio: 3 / 4;
+    max-height: 78dvh;
+  }
+  .hero-media img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* ---------- sections ---------- */
+  section { padding: 110px 0; }
+  .section-head { max-width: 62ch; margin-bottom: 56px; }
+  .section-head h2 { font-size: clamp(32px, 3.6vw, 52px); margin-bottom: 16px; }
+  .section-head p { color: var(--text-muted); font-size: 17px; }
+
+  /* ---------- how it works ---------- */
+  .steps { border-top: 1px solid var(--line); }
+  .step {
+    display: grid;
+    grid-template-columns: 120px minmax(0, 320px) 1fr;
+    gap: 32px;
+    align-items: baseline;
+    padding: 36px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .step-num {
+    font-size: 44px;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: rgba(255, 255, 255, 0.18);
+  }
+  .step h3 { font-size: 24px; }
+  .step p { color: var(--text-muted); max-width: 52ch; }
+
+  /* ---------- services bento ---------- */
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 220px;
+    gap: 16px;
+  }
+  .cell {
+    position: relative;
+    border-radius: var(--r-panel);
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    transition: transform 0.35s var(--ease), border-color 0.35s var(--ease);
+  }
+  .cell:hover { transform: translateY(-4px); border-color: rgba(255, 255, 255, 0.2); }
+  .cell i {
+    font-size: 30px;
+    color: var(--accent);
+    margin-bottom: auto;
+  }
+  .cell h3 { font-size: 20px; margin-bottom: 6px; }
+  .cell p { font-size: 14.5px; color: var(--text-muted); }
+  .cell-featured { grid-column: span 2; grid-row: span 2; padding: 32px; }
+  .cell-wide { grid-column: span 2; }
+  .cell-img::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10, 11, 13, 0.92) 18%, rgba(10, 11, 13, 0.15) 70%);
+    z-index: 1;
+  }
+  .cell-img > * { position: relative; z-index: 2; }
+  .cell-img img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    transition: transform 0.6s var(--ease);
+  }
+  .cell-img:hover img { transform: scale(1.04); }
+  .cell-featured h3 { font-size: 28px; }
+  .cell-featured p { font-size: 16px; max-width: 40ch; }
+  .cell-accent { background: var(--accent); border-color: transparent; }
+  .cell-accent i, .cell-accent h3 { color: var(--accent-ink); }
+  .cell-accent p { color: rgba(20, 11, 6, 0.75); }
+
+  /* ---------- detailing band ---------- */
+  .band {
+    position: relative;
+    min-height: 72dvh;
+    display: flex;
+    align-items: flex-end;
+    border-radius: var(--r-panel);
+    overflow: hidden;
+    box-shadow: var(--shadow-tint);
+  }
+  .band img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .band::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10, 11, 13, 0.9) 8%, rgba(10, 11, 13, 0) 62%);
+    z-index: 1;
+  }
+  .band-copy { position: relative; z-index: 2; padding: 56px; max-width: 640px; }
+  .band-copy h2 { font-size: clamp(30px, 3.4vw, 48px); margin-bottom: 14px; }
+  .band-copy p { color: rgba(242, 241, 238, 0.82); font-size: 17px; }
+
+  /* ---------- reviews ---------- */
+  .quotes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    align-items: start;
+  }
+  .quote:nth-child(2) { margin-top: 56px; }
+  .quote:nth-child(3) { margin-top: 112px; }
+  .quote blockquote {
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.4;
+    margin-bottom: 18px;
+  }
+  .quote figcaption { color: var(--text-muted); font-size: 15px; }
+  .quote figcaption strong { color: var(--text); display: block; font-weight: 700; }
+  .quote .stars { color: var(--accent); font-size: 15px; letter-spacing: 2px; margin-bottom: 14px; display: block; }
+
+  /* ---------- book cta ---------- */
+  .book {
+    text-align: center;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--r-panel);
+    padding: 96px 32px;
+  }
+  .book h2 { font-size: clamp(34px, 4vw, 58px); margin-bottom: 18px; }
+  .book p { color: var(--text-muted); font-size: 18px; max-width: 48ch; margin: 0 auto 36px; }
+  .book .phone {
+    display: block;
+    margin-top: 26px;
+    color: var(--text-muted);
+    font-size: 16px;
+  }
+  .book .phone a { color: var(--text); font-weight: 700; border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+  .book .phone a:hover { border-bottom-color: var(--accent); }
+
+  /* ---------- footer ---------- */
+  footer { border-top: 1px solid var(--line); padding: 64px 0 40px; }
+  .foot {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+  .foot p { color: var(--text-muted); font-size: 15px; max-width: 38ch; margin-top: 14px; }
+  .foot h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-muted); margin-bottom: 16px; font-weight: 700; }
+  .foot ul { list-style: none; display: grid; gap: 10px; font-size: 15px; }
+  .foot ul a:hover { color: var(--accent); }
+  .legal { color: var(--text-muted); font-size: 13.5px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  /* ---------- reveal motion ---------- */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+      transition-delay: var(--d, 0ms);
+    }
+    .reveal.in { opacity: 1; transform: none; }
+  }
+
+  /* ---------- mobile ---------- */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 36px;
+      padding-top: 110px;
+      min-height: auto;
+    }
+    .hero-media { aspect-ratio: 4 / 5; max-height: none; }
+    section { padding: 72px 0; }
+    .step { grid-template-columns: 64px 1fr; }
+    .step p { grid-column: 2; }
+    .step-num { font-size: 32px; }
+    .bento { grid-template-columns: 1fr; grid-auto-rows: auto; }
+    .cell { min-height: 190px; }
+    .cell-featured, .cell-wide { grid-column: span 1; grid-row: span 1; min-height: 320px; }
+    .quotes { grid-template-columns: 1fr; gap: 48px; }
+    .quote:nth-child(2), .quote:nth-child(3) { margin-top: 0; }
+    .band { min-height: 60dvh; }
+    .band-copy { padding: 28px; }
+    .book { padding: 64px 20px; }
+    .foot { grid-template-columns: 1fr; gap: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<header id="top-nav">
+  <div class="wrap nav">
+    <a class="brand" href="#">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="17" cy="17" r="15.5" stroke="#e8622c" stroke-width="3"/>
+        <path d="M21.5 12.2c-.7-1.4-2.3-2.2-4.2-2.2-2.5 0-4.3 1.3-4.3 3.3 0 4.3 8.9 2.4 8.9 7.2 0 2.2-2 3.5-4.6 3.5-2.2 0-4-1-4.7-2.6" stroke="#f2f1ee" stroke-width="2.6" stroke-linecap="round"/>
+      </svg>
+      Signature Auto
+    </a>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#how">How it works</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#book">Contact</a>
+    </nav>
+    <a class="btn btn-primary" href="tel:+16823419057">Book a service</a>
+  </div>
+</header>
+
+<div id="nav-sentinel" style="position:absolute;top:0;height:1px;width:1px;"></div>
+
+<main>
+
+  <div class="wrap">
+    <section class="hero" style="padding-top:96px;">
+      <div>
+        <div class="eyebrow reveal">Mobile mechanic service</div>
+        <h1 class="reveal" style="--d:80ms">The tire shop that comes to you.</h1>
+        <p class="reveal" style="--d:160ms">Certified mechanics, dealer-grade equipment, a fully stocked van. Most tire changes done in under an hour, in your driveway.</p>
+        <div class="hero-ctas reveal" style="--d:240ms">
+          <a class="btn btn-primary" href="tel:+16823419057">Book a service</a>
+          <a class="btn btn-ghost" href="#services">See services</a>
+        </div>
+      </div>
+      <div class="hero-media reveal" style="--d:200ms">
+        <img src="assets/hero.png" alt="Signature Auto mechanic changing a tire on an SUV in a residential driveway at dusk" fetchpriority="high" />
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <section id="how">
+      <div class="section-head reveal">
+        <h2>Skip the waiting room.</h2>
+        <p>No towing, no shuttle rides, no lost afternoon. You book, we drive to your car, you keep living your day.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-num">01</div>
+          <h3>Book</h3>
+          <p>Call or text us your location, vehicle, and what you need. We confirm a window that works for you, often same day.</p>
+        </div>
+        <div class="step reveal" style="--d:80ms">
+          <div class="step-num">02</div>
+          <h3>We pull up</h3>
+          <p>A certified mechanic arrives in a van stocked with tires, tools, fluids, and diagnostic gear. Home, office, or roadside.</p>
+        </div>
+        <div class="step reveal" style="--d:160ms">
+          <div class="step-num">03</div>
+          <h3>Drive on</h3>
+          <p>Work is torque-checked and road-tested before we leave. You get a digital report and a warranty on parts and labor.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <section id="services">
+      <div class="section-head reveal">
+        <h2>Everything a shop does, minus the shop.</h2>
+        <p>Seven core services, all performed curbside by certified technicians.</p>
+      </div>
+      <div class="bento">
+        <div class="cell cell-featured cell-img reveal">
+          <img src="assets/wheel.png" alt="Torque wrench tightening lug nuts on an alloy wheel" loading="lazy" />
+          <i class="ph ph-tire" aria-hidden="true"></i>
+          <h3>Tire change</h3>
+          <p>Flats, seasonal swaps, or full replacements. We bring the tires, mount them on-site, and torque every lug to spec.</p>
+        </div>
+        <div class="cell reveal" style="--d:60ms">
+          <i class="ph ph-gauge" aria-hidden="true"></i>
+          <h3>Tire balance</h3>
+          <p>Portable computer balancing that kills vibration and extends tread life.</p>
+        </div>
+        <div class="cell reveal" style="--d:120ms">
+          <i class="ph ph-drop" aria-hidden="true"></i>
+          <h3>Oil change</h3>
+          <p>Full synthetic or conventional, filter included, old oil hauled away.</p>
+        </div>
+        <div class="cell cell-wide cell-img reveal" style="--d:100ms">
+          <img src="assets/diagnostic.png" alt="Mechanic reading a diagnostic scanner inside a car at night" loading="lazy" />
+          <i class="ph ph-pulse" aria-hidden="true"></i>
+          <h3>System diagnostics</h3>
+          <p>Check-engine lights decoded on the spot with dealer-level scan tools.</p>
+        </div>
+        <div class="cell reveal" style="--d:140ms">
+          <i class="ph ph-disc" aria-hidden="true"></i>
+          <h3>Brake change</h3>
+          <p>Pads and rotors replaced in your driveway, bedded in and road-tested.</p>
+        </div>
+        <div class="cell reveal" style="--d:200ms">
+          <i class="ph ph-waves" aria-hidden="true"></i>
+          <h3>Car wash</h3>
+          <p>Waterless or low-water hand wash that's safe for your paint and your lawn.</p>
+        </div>
+        <div class="cell cell-wide cell-accent reveal" style="--d:180ms">
+          <i class="ph ph-sparkle" aria-hidden="true"></i>
+          <h3>Detailing</h3>
+          <p>Interior deep cleans and exterior polish packages, from daily drivers to weekend cars.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <section>
+      <div class="band reveal">
+        <img src="assets/detailing.png" alt="Hand polishing the hood of a dark luxury sedan at dusk" loading="lazy" />
+        <div class="band-copy">
+          <h2>Showroom finish, curbside.</h2>
+          <p>Our detailing crew works the same driveways our mechanics do. Paint-safe wash, interior reset, and a car that looks like the day you bought it.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <section id="reviews">
+      <div class="section-head reveal">
+        <h2>Drivers keep our number saved.</h2>
+      </div>
+      <div class="quotes">
+        <figure class="quote reveal">
+          <span class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <blockquote>&#8220;Flat tire in my office garage at 4pm. New tire mounted and balanced by 5:30. I never left my desk.&#8221;</blockquote>
+          <figcaption><strong>Marcus Ellison</strong>Property manager</figcaption>
+        </figure>
+        <figure class="quote reveal" style="--d:100ms">
+          <span class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <blockquote>&#8220;They did brakes and an oil change while I worked from home. Sent photos of the worn pads before touching anything.&#8221;</blockquote>
+          <figcaption><strong>Priya Raman</strong>Software engineer</figcaption>
+        </figure>
+        <figure class="quote reveal" style="--d:200ms">
+          <span class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <blockquote>&#8220;Winter tires on all three of our family cars in one visit. Cheaper than the dealership and zero waiting.&#8221;</blockquote>
+          <figcaption><strong>Dana Kowalski</strong>Parent of new drivers</figcaption>
+        </figure>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <section id="book">
+      <div class="book reveal">
+        <h2>Your car stays put. We don't.</h2>
+        <p>Serving the metro and surrounding suburbs, seven days a week. Same-day appointments are usually available.</p>
+        <a class="btn btn-primary" href="tel:+16823419057">Book a service</a>
+        <span class="phone">Or call us directly at <a href="tel:+16823419057">(682) 341-9057</a></span>
+      </div>
+    </section>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="brand" href="#">
+          <svg width="30" height="30" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="17" cy="17" r="15.5" stroke="#e8622c" stroke-width="3"/>
+            <path d="M21.5 12.2c-.7-1.4-2.3-2.2-4.2-2.2-2.5 0-4.3 1.3-4.3 3.3 0 4.3 8.9 2.4 8.9 7.2 0 2.2-2 3.5-4.6 3.5-2.2 0-4-1-4.7-2.6" stroke="#f2f1ee" stroke-width="2.6" stroke-linecap="round"/>
+          </svg>
+          Signature Auto
+        </a>
+        <p>Mobile mechanic and tire service. Certified technicians, warrantied work, at your home or office.</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Tire change</a></li>
+          <li><a href="#services">Tire balance</a></li>
+          <li><a href="#services">Oil change</a></li>
+          <li><a href="#services">Brakes &amp; diagnostics</a></li>
+          <li><a href="#services">Detailing &amp; wash</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+16823419057">(682) 341-9057</a></li>
+          <li><a href="mailto:hello@signatureauto.co">hello@signatureauto.co</a></li>
+          <li>Mon to Sun, 7am to 9pm</li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>&copy; 2026 Signature Auto. All rights reserved.</span>
+      <span>Licensed &amp; insured mobile repair</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // nav style toggles via sentinel; avoids scroll listeners
+  const nav = document.getElementById("top-nav");
+  const sentinel = document.getElementById("nav-sentinel");
+  new IntersectionObserver(([e]) => {
+    nav.classList.toggle("scrolled", !e.isIntersecting);
+  }).observe(sentinel);
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) {
+    document.querySelectorAll(".reveal").forEach((el) => el.classList.add("in"));
+  } else {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.18 }
+    );
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+  }
+</script>
+
+</body>
+</html>
